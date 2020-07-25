@@ -1,4 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black;
+    color: greenyellow;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 #container {
+    padding-top: 200px;
+    width: 50%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 500px 500px;
     grid-template-rows: auto auto;
