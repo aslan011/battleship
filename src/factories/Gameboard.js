@@ -12,7 +12,7 @@ const Gameboard = () => {
         index,
         cords: char + String(t),
         containShip: false,
-        hit: false
+        hit: false,
       };
       index++;
       grid.push(gridSquare);
@@ -21,8 +21,8 @@ const Gameboard = () => {
 
   const getAllShipPositons = () => {
     const allShipPositons = [];
-    Ships.forEach(ship => {
-      ship.getPositions().forEach(position => {
+    Ships.forEach((ship) => {
+      ship.getPositions().forEach((position) => {
         allShipPositons.push(position);
       });
     });
@@ -31,7 +31,7 @@ const Gameboard = () => {
 
   const placeShips = () => {
     const allShipPositions = getAllShipPositons();
-    grid.forEach(square => {
+    grid.forEach((square) => {
       const { cords } = square;
       if (allShipPositions.includes(cords)) {
         // eslint-disable-next-line no-param-reassign
@@ -42,7 +42,7 @@ const Gameboard = () => {
 
   placeShips();
 
-  const receiveAttack = cords => {
+  const receiveAttack = (cords) => {
     for (let i = 0; i < Ships.length; i++) {
       if (Ships[i].getPositions().includes(cords) === true) {
         Ships[i].hit(cords);
@@ -53,7 +53,9 @@ const Gameboard = () => {
       }
     }
   };
-  return { grid, Ships, missedPositions, receiveAttack, placeShips };
+  return {
+    grid, Ships, missedPositions, receiveAttack, placeShips,
+  };
 };
 
 export default Gameboard;

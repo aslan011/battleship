@@ -22,10 +22,12 @@ const Player = () => {
     return randomHit;
   };
 
-  const playerHit = cords => {
+  const playerHit = (cords) => {
     Computer.receiveAttack(cords);
   };
-  return { Player1, Computer, playerHit, computerHit };
+  return {
+    Player1, Computer, playerHit, computerHit,
+  };
 };
 
 export default Player;

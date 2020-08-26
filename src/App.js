@@ -4,7 +4,7 @@ import { Ship } from './factories/Ship';
 const PlayerGrid = document.getElementById('player');
 const ComputerGrid = document.getElementById('computer');
 const ships = Array.from(document.getElementsByClassName('ship'));
-const addedShips = [];
+let addedShips = [];
 
 let chosenShip;
 let Game = Player();
@@ -14,7 +14,7 @@ let shipLength = 4;
 function addDOMShips() {
   PlayerGrid.innerHTML = '';
   ComputerGrid.innerHTML = '';
-  Game.Player1.grid.forEach(square => {
+  Game.Player1.grid.forEach((square) => {
     const div = document.createElement('div');
     div.className = 'squares';
     div.id = square.cords;
@@ -24,7 +24,7 @@ function addDOMShips() {
     PlayerGrid.appendChild(div);
   });
 
-  Game.Computer.grid.forEach(square => {
+  Game.Computer.grid.forEach((square) => {
     const div = document.createElement('div');
     div.className = 'COMsquares';
     div.id = square.cords;
@@ -39,10 +39,10 @@ addDOMShips();
 
 function updateSquares(cords) {
   const comHit = Game.computerHit();
-  Array.from(PlayerGrid.childNodes).forEach(square => {
+  Array.from(PlayerGrid.childNodes).forEach((square) => {
     if (
-      square.id === comHit &&
-      Array.from(square.classList).includes('containShip')
+      square.id === comHit
+      && Array.from(square.classList).includes('containShip')
     ) {
       square.classList.add('hitShip');
     } else if (square.id === comHit) {
@@ -59,22 +59,28 @@ function updateSquares(cords) {
 
 function reset() {
   Game = Player();
-  Array.from(PlayerGrid.childNodes).forEach(div => {
+  Array.from(PlayerGrid.childNodes).forEach((div) => {
     div.classList.remove('hitShip', 'hitEmpty', 'containShip');
   });
-  Array.from(ComputerGrid.childNodes).forEach(div => {
+  Array.from(ComputerGrid.childNodes).forEach((div) => {
     div.classList.remove('hitShip', 'hitEmpty', 'containShip');
   });
   shipLimit = 4;
   shipLength = 4;
+
+  addedShips = [];
+
+  ships.forEach((ship) => {
+    ship.style.position = '';
+  });
 }
 
 function updateShips() {
   const playerSunkShips = Array.from(Game.Computer.Ships).filter(
-    ship => ship.sink() === true
+    (ship) => ship.sink() === true,
   );
   const compSunkShips = Array.from(Game.Player1.Ships).filter(
-    ship => ship.sink() === true
+    (ship) => ship.sink() === true,
   );
 
   if (playerSunkShips.length === 4) {
@@ -96,7 +102,7 @@ const squares = document.querySelectorAll('#computer');
 
 // remember that the eventlistner is needed to be added to the parent, becuase when they are created dynmiacally, its not added
 const eventHandle = () => {
-  squares[0].addEventListener('click', e => {
+  squares[0].addEventListener('click', (e) => {
     playerTurn(e.target);
   });
 };
@@ -156,8 +162,8 @@ PlayerGrid.addEventListener('dragexit', () => {
   PlayerGrid.classList.toggle('active');
 });
 
-ships.forEach(ship => {
-  ship.addEventListener('dragstart', e => {
+ships.forEach((ship) => {
+  ship.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', e.target.id);
     const id = e.dataTransfer.getData('text');
     chosenShip = document.getElementById(id);
@@ -169,13 +175,13 @@ ships.forEach(ship => {
   });
 });
 
-ships.forEach(ship => {
-  ship.addEventListener('dragend', e => {
+ships.forEach((ship) => {
+  ship.addEventListener('dragend', (e) => {
     e.preventDefault();
   });
 });
 
-PlayerGrid.addEventListener('dragover', e => {
+PlayerGrid.addEventListener('dragover', (e) => {
   e.preventDefault();
 });
 

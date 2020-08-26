@@ -1,4 +1,4 @@
-const Ship = positions => {
+const Ship = (positions) => {
   const Positions = [...positions];
   const hitPositions = [];
   let isSunk = false;
@@ -10,7 +10,7 @@ const Ship = positions => {
     return isSunk;
   };
 
-  const hit = number => {
+  const hit = (number) => {
     if (Positions.includes(number) === true) {
       hitPositions.push(number);
       sink();
@@ -22,7 +22,9 @@ const Ship = positions => {
   const getPositions = () => Positions;
   const getHitPositions = () => hitPositions;
 
-  return { hit, sink, getPositions, getHitPositions };
+  return {
+    hit, sink, getPositions, getHitPositions,
+  };
 };
 
 // eslint-disable-next-line import/prefer-default-export
